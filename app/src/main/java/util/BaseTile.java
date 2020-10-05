@@ -83,7 +83,7 @@ public abstract class BaseTile extends View {
 
     public void setPosition(int position) {
         x = position % StartGame.Width;
-        y = position / StartGame.Height;
+        y = position / StartGame.Width;
 
         invalidate();
     }

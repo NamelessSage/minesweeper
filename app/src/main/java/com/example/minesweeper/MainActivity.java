@@ -11,6 +11,8 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
     private Spinner xSpin;
@@ -25,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         xSpin = findViewById(R.id.xDropdownlist);
         ySpin = findViewById(R.id.yDropdownlist);
 
@@ -76,12 +77,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_HEIGHT, Height);
         startActivity(intent);
     }
-
-//    public static MainActivity getInstance(){
-//        if (instance == null){
-//            instance = new
-//        }
-//    }
 
 
 }

@@ -25,10 +25,10 @@ public class StartGame extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
-        StartGame.context = getApplicationContext();
-        setContentView(R.layout.activity_game);
 
+        setContentView(R.layout.activity_game);
         Intent intent = getIntent();
+        StartGame.context = getApplicationContext();
         Width = intent.getIntExtra(MainActivity.EXTRA_WIDTH, 20);
         Height = intent.getIntExtra(MainActivity.EXTRA_HEIGHT, 20);
         GameGrid = InitGameGrid(Width, Height);
@@ -51,7 +51,7 @@ public class StartGame extends AppCompatActivity {
 
     public static View getTileAt(int position) {
         int x = position % Width;
-        int y = position / Height;
+        int y = position / Width;
         return GameGrid[x][y];
     }
 
