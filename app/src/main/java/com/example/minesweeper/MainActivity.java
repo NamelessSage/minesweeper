@@ -1,6 +1,8 @@
 package com.example.minesweeper;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public static String EXTRA_WIDTH = "WIDTH";
     public static String EXTRA_HEIGHT = "HEIGHT";
     private Button button;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +33,23 @@ public class MainActivity extends AppCompatActivity {
         xSpin = findViewById(R.id.xDropdownlist);
         ySpin = findViewById(R.id.yDropdownlist);
 
-        List<String> list = new ArrayList<>();
-        for (int i = 5; i < 100; i++) {
-            list.add(String.valueOf(i));
+        List<String> listx = new ArrayList<>();
+        for (int i = 5; i < 21; i++) {
+            listx.add(String.valueOf(i));
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        xSpin.setAdapter(adapter);
-        ySpin.setAdapter(adapter);
+
+        List<String> listy = new ArrayList<>();
+        for (int i = 5; i < 31; i++) {
+            listy.add(String.valueOf(i));
+        }
+
+        ArrayAdapter<String> adapterx = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listx);
+        adapterx.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adaptery = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listy);
+        adapterx.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        xSpin.setAdapter(adapterx);
+        ySpin.setAdapter(adaptery);
 
         xSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -72,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
     //Goes to new activity and passes variables to it
     public void start_new_game() {
-        Intent intent = new Intent(this, StartGame.class);
+        Intent intent = new Intent(context, StartGame.class);
         intent.putExtra(EXTRA_WIDTH, Width);
         intent.putExtra(EXTRA_HEIGHT, Height);
         startActivity(intent);

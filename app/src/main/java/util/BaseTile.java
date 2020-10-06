@@ -73,7 +73,7 @@ public abstract class BaseTile extends View {
         return y;
     }
 
-    public float getXpos() {
+    public int getXpos() {
         return x;
     }
 
@@ -83,8 +83,7 @@ public abstract class BaseTile extends View {
 
     public void setPosition(int position) {
         x = position % StartGame.Width;
-        y = position / StartGame.Width;
-
+        y = position / StartGame.Height;
         invalidate();
     }
 

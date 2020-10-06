@@ -9,7 +9,7 @@ public class Generator {
     public static int[][] generateGrid(int width, int height) {
         Random ran = new Random();
 
-        int bombs = (int) (width * height * 0.1);
+        int bombs = (int) (width * height * 0.2);
         if (bombs <= 0) {
             bombs = 1;
         }
@@ -65,6 +65,4 @@ public class Generator {
         }
         return false;
     }
-
-
 }

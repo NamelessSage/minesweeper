@@ -14,12 +14,11 @@ public class Grid extends GridView {
         super(context, att);
         setNumColumns(StartGame.Width);
         setAdapter(new GridAdapter());
-
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     private class GridAdapter extends BaseAdapter{
