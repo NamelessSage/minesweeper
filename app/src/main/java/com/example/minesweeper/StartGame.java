@@ -50,7 +50,7 @@ public class StartGame extends AppCompatActivity {
         int[][] Grid = Generator.generateGrid(Width, Height);
         for (int x = 0; x < Width; x++) {
             for (int y = 0; y < Height; y++) {
-                GameGrid[x][y] = new Tile(context, y * Height + x);
+                GameGrid[x][y] = new Tile(context, y * Width + x);
                 GameGrid[x][y].setValue(Grid[x][y]);
                 GameGrid[x][y].invalidate();
             }
