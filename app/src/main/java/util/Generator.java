@@ -31,7 +31,7 @@ public class Generator {
         return grid;
     }
 
-    //Fills all of the grid cells with bomb information around them
+    //Fills all of the grid tiles with bomb information around them
     private static int[][] bombsAround(int grid[][], int width, int height) {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -55,7 +55,6 @@ public class Generator {
         if (isBomb(grid, x, y + 1, width, height)) count++;
         if (isBomb(grid, x + 1, y + 1, width, height)) count++;
         return count;
-
     }
 
     //Check if a cell is a bomb

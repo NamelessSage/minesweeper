@@ -29,16 +29,12 @@ public class StartGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-
-
-        //StartGame.context = getApplicationContext();
-
-//        int x = intent.getIntExtra(MainActivity.EXTRA_WIDTH, 5);
-//        int y = intent.getIntExtra(MainActivity.EXTRA_HEIGHT, 5);
         Width =intent.getIntExtra(MainActivity.EXTRA_WIDTH, 5);
         Height =intent.getIntExtra(MainActivity.EXTRA_HEIGHT, 5);
+
 //        Width = Integer.max(x, y);
 //        Height = Integer.min(x, y);
+
         GameGrid = InitGameGrid(Width, Height);
 
         generateGrid(context);

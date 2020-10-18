@@ -10,22 +10,13 @@ import android.widget.GridView;
 import com.example.minesweeper.StartGame;
 
 public class Grid extends GridView {
-    public Grid(Context context, AttributeSet att){
+    public Grid(Context context, AttributeSet att) {
         super(context, att);
         setNumColumns(StartGame.Width);
         setAdapter(new GridAdapter());
     }
 
-
-
-
-
-//    @Override
-//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//    }
-
-    private class GridAdapter extends BaseAdapter{
+    private class GridAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
