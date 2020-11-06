@@ -4,12 +4,17 @@ package util;
 import java.util.Random;
 
 public class Generator {
+    public static int bombsGlobal;
 
-    //Places bombs and then fills all information about each cell
+
     public static int[][] generateGrid(int width, int height) {
         Random ran = new Random();
 
         int bombs = (int) (width * height * 0.2);
+        bombsGlobal = bombs;
+        int hearts = 2;
+
+
         if (bombs <= 0) {
             bombs = 1;
         }
@@ -28,6 +33,24 @@ public class Generator {
             }
         }
         grid = bombsAround(grid, width, height);
+        grid = placeHearts(hearts, grid, width, height, ran);
+        return grid;
+    }
+
+    private static int[][] placeHearts(int hearts, int grid[][], int width, int height, Random ran) {
+        int max = width*height+1;
+        int i=0;
+        while (hearts > 0 && i < max) {
+            int x = ran.nextInt(width);
+            int y = ran.nextInt(height);
+            if (grid[x][y] == 0) {
+                grid[x][y] = -2;
+                hearts--;
+                i++;
+            }
+            else
+                i++;
+        }
         return grid;
     }
 

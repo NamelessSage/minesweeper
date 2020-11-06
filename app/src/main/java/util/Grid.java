@@ -16,13 +16,16 @@ public class Grid extends GridView {
         setAdapter(new GridAdapter());
     }
 
-    private class GridAdapter extends BaseAdapter {
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
 
+    private class GridAdapter extends BaseAdapter {
         @Override
         public int getCount() {
             return StartGame.Width * StartGame.Height;
         }
-
         @Override
         public Object getItem(int i) {
             return null;

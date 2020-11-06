@@ -10,12 +10,13 @@ import androidx.core.content.ContextCompat;
 import com.example.minesweeper.R;
 import com.example.minesweeper.StartGame;
 
-public class Tile extends BaseTile implements View.OnClickListener{
+public class Tile extends BaseTile implements View.OnClickListener, View.OnLongClickListener {
 
-    public Tile(Context context, int position){
+    public Tile(Context context, int position) {
         super(context);
         setPosition(position);
         setOnClickListener(this);
+        setOnLongClickListener(this);
     }
 
     @Override
@@ -26,41 +27,67 @@ public class Tile extends BaseTile implements View.OnClickListener{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if(isClicked()){
-            if(isMine())
-                drawMine(canvas);
-            else
-                drawNumber(canvas);
+        if (isFlagged()) {
+            drawFlag(canvas);
+        } else if (!isClicked() && isMine() && isRevealed()) {
+            drawNormalBomb(canvas);
+        } else {
+            if (isClicked()) {
+                if (getValue() == -1)
+                    drawMineExploded(canvas);
+                else if (getValue() == -2)
+                    drawHeart(canvas);
+                else
+                    drawNumber(canvas);
+            } else {
+                drawButton(canvas);
+            }
         }
-        else {
-            drawButton(canvas);
-        }
+
     }
 
-    private void drawMine(Canvas canvas) {
-        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.bomb);
-        drawable.setBounds(0,0,getWidth(),getHeight());
+    private void drawNormalBomb(Canvas canvas) {
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.bomb_normal);
+        drawable.setBounds(0, 0, getWidth(), getHeight());
+        drawable.draw(canvas);
+    }
+
+    private void drawFlag(Canvas canvas) {
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.flag);
+        drawable.setBounds(0, 0, getWidth(), getHeight());
+        drawable.draw(canvas);
+    }
+
+    private void drawMineExploded(Canvas canvas) {
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.bomb_exploded);
+        drawable.setBounds(0, 0, getWidth(), getHeight());
         drawable.draw(canvas);
     }
 
     private void drawButton(Canvas canvas) {
         Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.button);
-        drawable.setBounds(0,0,getWidth(),getHeight());
+        drawable.setBounds(0, 0, getWidth(), getHeight());
         drawable.draw(canvas);
     }
 
-    public void onClick(View view){
+    private void drawHeart(Canvas canvas) {
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.heart);
+        drawable.setBounds(0, 0, getWidth(), getHeight());
+        drawable.draw(canvas);
+    }
+
+    public void onClick(View view) {
         StartGame.click(getXpos(), getYpos());
     }
 
-    private void drawNumber(Canvas canvas){
+    private void drawNumber(Canvas canvas) {
         Drawable drawable = null;
-
         switch (getValue()) {
             case 0:
                 drawable = ContextCompat.getDrawable(getContext(), R.drawable.button0);
                 break;
             case 1:
+
                 drawable = ContextCompat.getDrawable(getContext(), R.drawable.button1);
                 break;
             case 2:
@@ -84,12 +111,16 @@ public class Tile extends BaseTile implements View.OnClickListener{
             case 8:
                 drawable = ContextCompat.getDrawable(getContext(), R.drawable.button8);
                 break;
-            default:
-                drawable = ContextCompat.getDrawable(getContext(), R.drawable.button0);
         }
-
-        drawable.setBounds(0,0,getWidth(),getHeight());
+        drawable.setBounds(0, 0, getWidth(), getHeight());
         drawable.draw(canvas);
 
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        StartGame.placeFlag(getXpos(), getYpos());
+
+        return true;
     }
 }

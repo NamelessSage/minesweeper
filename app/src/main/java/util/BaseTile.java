@@ -12,6 +12,7 @@ public abstract class BaseTile extends View {
     private boolean isMine;
     private boolean isHealth;
     private boolean isFlagged;
+    private boolean isExploded;
     private int position;
     private int x, y;
 
@@ -28,10 +29,11 @@ public abstract class BaseTile extends View {
         isClicked = false;
         isMine = false;
         isFlagged = false;
-
+        isExploded = false;
         if (value == -1)
             isMine = true;
-
+        if (value == -2)
+            isHealth = true;
         this.value = value;
     }
 
@@ -41,6 +43,7 @@ public abstract class BaseTile extends View {
 
     public void setRevealed(boolean revealed) {
         isRevealed = revealed;
+        invalidate();
     }
 
     public boolean isClicked() {
@@ -93,5 +96,13 @@ public abstract class BaseTile extends View {
 
     public void setHealth(boolean health) {
         isHealth = health;
+    }
+
+    public boolean isExploded() {
+        return isExploded;
+    }
+
+    public void setExploded(boolean exploded) {
+        isExploded = exploded;
     }
 }
